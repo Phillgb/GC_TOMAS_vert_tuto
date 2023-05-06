@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Job submission &mdash; Installation and operation of GEOS-Chem TOMAS on Stetson 0.1 documentation</title>
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/fonts.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="How to use qsub:" href="scheduler.html" />
+    <link rel="prev" title="Directory structure" href="dir_struc.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../index.html" class="icon icon-home"> Installation and operation of GEOS-Chem TOMAS on Stetson
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Stetson User guide</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="Stetson.html">Getting Started on Stetson</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="dir_struc.html">Directory structure</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Job submission</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#logging-in-into-computing-nodes">Logging in into computing nodes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#loading-packages">Loading packages</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#scheduler">Scheduler</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="scheduler.html">How to use qsub:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="file_trans.html">File Transfert</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">GEOS-Chem TOMAS user guide</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../Gcc_TOMAS/geos-chem.html">Getting started with GEOS-Chem TOMAS</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Installation and operation of GEOS-Chem TOMAS on Stetson</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home"></a></li>
+          <li class="breadcrumb-item"><a href="Stetson.html">Getting Started on Stetson</a></li>
+      <li class="breadcrumb-item active">Job submission</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/guide/Stetson/job_op.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="job-submission">
+<h1>Job submission<a class="headerlink" href="#job-submission" title="Permalink to this headline"></a></h1>
+<p>This section will describe the processes of lauching programs on the Stetson
+server and using the scheduler to launch lenghty tasks.</p>
+<section id="logging-in-into-computing-nodes">
+<h2>Logging in into computing nodes<a class="headerlink" href="#logging-in-into-computing-nodes" title="Permalink to this headline"></a></h2>
+<p>The execution of any programs on stetson are done by logging into compute nodes
+directly via <code class="code docutils literal notranslate"><span class="pre">ssh</span></code>. The compute nodes on Stetson are numbered from 1 to 32,
+with the most recent and powerfull nodes being the 9 last ones (23 to 32). To log
+into the computing node 24 for example, the user would have to input the following
+in the command line <code class="code docutils literal notranslate"><span class="pre">ssh</span> <span class="pre">newnode24</span></code>. This will redirect you into the home
+directory on node 24. To execute a programs, you would then need to navigate to the
+appropriate working directory and launch the program as you would on a local machine.</p>
+<p>Before logging into a new node, it is a good practice to verify the current load
+on each node. The usage of each node can be monitored via the <a class="reference external" href="http://stetson.phys.dal.ca">Cluster status
+website</a>.</p>
+</section>
+<section id="loading-packages">
+<h2>Loading packages<a class="headerlink" href="#loading-packages" title="Permalink to this headline"></a></h2>
+<p>Some programs might require you to have some packages installed on the system,
+prior to their execution. For example, the compilation of the GEOS-Chem model
+require the user to have specific modules like netcdf and fortran compiler to work.</p>
+<p>On stetson, most packages needed to opperate GEOS-Chem with or without TOMAS are
+already available as packaged modules in shared <a class="reference internal" href="dir_struc.html#packages-libraries"><span class="std std-ref">Packages directory</span></a>.</p>
+<p>To load the desired packages in a session, the user need to execute the desired
+libraries as a source code. For most use cases, the necessary packages to execute
+GEOS-Chem are present in the <code class="file docutils literal notranslate"><span class="pre">set-path-intel-gchp-conda-2022.0.2-intelmpi</span></code>
+and can be loaded into a session via the following command
+<code class="code docutils literal notranslate"><span class="pre">source</span> <span class="pre">/software/share/set-path-intel-gchp-conda-2022.0.2-intelmpi</span></code>.</p>
+</section>
+<section id="scheduler">
+<h2>Scheduler<a class="headerlink" href="#scheduler" title="Permalink to this headline"></a></h2>
+<p>Additionnally, to manually launching programs on Stetson, it is also possible to
+execute series of command by using a scheduler. Stetson uses the grid engine scheduler
+<strong>qsub</strong>.</p>
+<p>For lenghty simulations to be run on Stetson, it is recommended to use the scheduler
+in order to execute those simulations. The use of the scheduler allow for an even
+repartition of the server ressources when multiples tasks are launched at the same
+time and is necessary to execute the model in parallel mode. An other advantage
+of the scheduler, is that it allows for a better management of time. For example,
+if all nodes are occupied when a user manually access the server, launching a job
+via the scheduler will allow it to start as soon as the necessary ressources get
+freed, instead of rellying on the user manually accessing the server and guessing
+when the nodes will get freed up.</p>
+<p>Information on how to work with qsub are available in the next section <a class="reference internal" href="scheduler.html#how-to-use-qsub"><span class="std std-ref">How to use qsub:</span></a>
+and in the original <a class="reference external" href="https://gridscheduler.sourceforge.net/htmlman/htmlman1/qsub.html">qsub documentation</a>.</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="dir_struc.html" class="btn btn-neutral float-left" title="Directory structure" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="scheduler.html" class="btn btn-neutral float-right" title="How to use qsub:" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, Phillipe Gauvin-Bourdon and Betty Croft.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

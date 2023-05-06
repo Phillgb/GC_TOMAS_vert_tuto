@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>How to use qsub: &mdash; Installation and operation of GEOS-Chem TOMAS on Stetson 0.1 documentation</title>
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/fonts.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="File Transfert" href="file_trans.html" />
+    <link rel="prev" title="Job submission" href="job_op.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../index.html" class="icon icon-home"> Installation and operation of GEOS-Chem TOMAS on Stetson
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Stetson User guide</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="Stetson.html">Getting Started on Stetson</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="dir_struc.html">Directory structure</a></li>
+<li class="toctree-l2"><a class="reference internal" href="job_op.html">Job submission</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">How to use qsub:</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#creating-a-job-script">Creating a job script</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#qsub-opperation">Qsub opperation</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="file_trans.html">File Transfert</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">GEOS-Chem TOMAS user guide</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../Gcc_TOMAS/geos-chem.html">Getting started with GEOS-Chem TOMAS</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Installation and operation of GEOS-Chem TOMAS on Stetson</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home"></a></li>
+          <li class="breadcrumb-item"><a href="Stetson.html">Getting Started on Stetson</a></li>
+      <li class="breadcrumb-item active">How to use qsub:</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/guide/Stetson/scheduler.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="how-to-use-qsub">
+<span id="id1"></span><h1>How to use qsub:<a class="headerlink" href="#how-to-use-qsub" title="Permalink to this headline"></a></h1>
+<p>To execute tasks through a scheduler, the user need to provide that scheduler with
+some informations on the ressources needed to execute those tasks and a list of
+actions that need to be followed to lauch the desired programs. These informations
+and steps are passed to the scheduler in the form of text in what we call a <em>job script</em>.
+The scheduler interpret this script and will execute the list of command given when
+the ressources required by the tasks have been freed.</p>
+<section id="creating-a-job-script">
+<h2>Creating a job script<a class="headerlink" href="#creating-a-job-script" title="Permalink to this headline"></a></h2>
+<p>Here is an example of a typical job script used to execute a simulation of GEOS-Chem
+TOMAS on Stetson.</p>
+<p>This script have 2 main sections, the first part being the directives passed to
+the scheduler regarding the ressources that will be needed to execute the tasks
+we want to run (called shebang) and the second part being a list of actions to be
+executed to launch the simulation.</p>
+<p>The most commonly used shebang options are the following:</p>
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-arg-0">
+<span id="cmdoption-arg"></span><span class="sig-name descname"><span class="pre">#$</span></span><span class="sig-prename descclassname"> <span class="pre">-S</span> <span class="pre">/bin/bash</span></span><a class="headerlink" href="#cmdoption-arg-0" title="Permalink to this definition"></a></dt>
+<dd><p>Specify which interpreter to use to read and process the following command.
+(Using the bash shell interpret in the current case.)</p>
+</dd></dl>
+
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-arg-1">
+<span class="sig-name descname"><span class="pre">#$</span></span><span class="sig-prename descclassname"> <span class="pre">-o</span> <span class="pre">job_output</span></span><a class="headerlink" href="#cmdoption-arg-1" title="Permalink to this definition"></a></dt>
+<dd><p>Specify that where the path where the standard output of the job will be written.</p>
+</dd></dl>
+
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-arg-2">
+<span class="sig-name descname"><span class="pre">#$</span></span><span class="sig-prename descclassname"> <span class="pre">-M</span> <span class="pre">phillipe.gauvin-bourdon&#64;dal.ca</span></span><a class="headerlink" href="#cmdoption-arg-2" title="Permalink to this definition"></a></dt>
+<dd><p>Specify at which email to send notifications corresponding with the current job.</p>
+</dd></dl>
+
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-arg-3">
+<span class="sig-name descname"><span class="pre">#$</span></span><span class="sig-prename descclassname"> <span class="pre">-m</span> <span class="pre">be</span></span><a class="headerlink" href="#cmdoption-arg-3" title="Permalink to this definition"></a></dt>
+<dd><p>Specify under which circumstances notifications need to be sent to the email
+address provided.</p>
+<ul class="simple">
+<li><p>b: Begginning of the job</p></li>
+<li><p>e: End  of the job</p></li>
+<li><p>a: Job is aborted or rescheduled</p></li>
+<li><p>s: Job is suspended</p></li>
+<li><p>n: No mail sent</p></li>
+</ul>
+</dd></dl>
+
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-arg-4">
+<span class="sig-name descname"><span class="pre">#$</span></span><span class="sig-prename descclassname"> <span class="pre">-pe</span> <span class="pre">threads</span> <span class="pre">36</span></span><a class="headerlink" href="#cmdoption-arg-4" title="Permalink to this definition"></a></dt>
+<dd><p>Specify the parallel environments options. Here qsub is asked to use 36 threads when
+possible.</p>
+</dd></dl>
+
+<p>Following the <em>shebang</em>, the rest of the script simply list actions to be executed
+in order and that will lead to the execution of our GEOS-Chem TOMAS simulation.
+Those lines are corresponding to the actions that a user would enter in the terminal
+command lines if they were to execute a simulation manually.</p>
+<p>The main commands used when launching GEOS-Chem simulation are the following:</p>
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-arg-export">
+<span class="sig-name descname"><span class="pre">export</span></span><span class="sig-prename descclassname"> <span class="pre">OMP_NUM_THREADS=36</span></span><a class="headerlink" href="#cmdoption-arg-export" title="Permalink to this definition"></a></dt>
+<dd><p>Specify the number of computationnal cores that GEOS-Chem should use. Normally,
+needs to match the number specified with the <em>-pe</em> option above.</p>
+</dd></dl>
+
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-arg-cd">
+<span class="sig-name descname"><span class="pre">cd</span></span><span class="sig-prename descclassname"> <span class="pre">/data12/pgbourdon/GCC_v14.1.1/rundirs/gc-4x5_47L_merra2_fullchem_TOMAS15</span></span><a class="headerlink" href="#cmdoption-arg-cd" title="Permalink to this definition"></a></dt>
+<dd><p>Navigate to the run directory of the simulation to execute.</p>
+</dd></dl>
+
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-arg-.-gcclassic">
+<span id="cmdoption-arg-gcclassic"></span><span class="sig-name descname"><span class="pre">./gcclassic</span></span><span class="sig-prename descclassname"> <span class="pre">&gt;</span> <span class="pre">runlog.txt</span></span><a class="headerlink" href="#cmdoption-arg-.-gcclassic" title="Permalink to this definition"></a></dt>
+<dd><p>Launch the GEOS-Chem classic simulation and pipes the command line output to
+a file named <code class="file docutils literal notranslate"><span class="pre">runlog.txt</span></code>.</p>
+</dd></dl>
+
+</section>
+<section id="qsub-opperation">
+<h2>Qsub opperation<a class="headerlink" href="#qsub-opperation" title="Permalink to this headline"></a></h2>
+<p>After having created your <em>job script</em>, the opperations containned within the script
+are passed to the scheduler <strong>qsub</strong> via the command line command <code class="code docutils literal notranslate"><span class="pre">qsub</span></code>.
+It does not matter what your current directory is when you are passing the command
+to read the <em>job script</em> to <strong>qsub</strong> as long as you built your <em>job script</em> as if
+the user was starting back from the home directory of Stetson.</p>
+<p>In its most simple form, the <code class="code docutils literal notranslate"><span class="pre">qsub</span></code> command only demand that a <em>job script</em>
+to be passed as parameter, like the following <code class="code docutils literal notranslate"><span class="pre">qsub</span> <span class="pre">&lt;job_script.sh&gt;</span></code>. Since
+when using Stetson, we would like for the scheduler to use the newnodes of the server
+to execute the simulations of GEOS-Chem we need to pass an extra option with the
+<code class="code docutils literal notranslate"><span class="pre">qsub</span></code> command.</p>
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-arg-qsub">
+<span class="sig-name descname"><span class="pre">qsub</span></span><span class="sig-prename descclassname"> <span class="pre">-q</span> <span class="pre">2017-batch</span> <span class="pre">geoschem_run.sh</span></span><a class="headerlink" href="#cmdoption-arg-qsub" title="Permalink to this definition"></a></dt>
+<dd><p>Typical <strong>qsub</strong> command line call to execute the <em>job script</em> <code class="file docutils literal notranslate"><span class="pre">geoschem_run.sh</span></code>
+on the new nodes of the Stetson cluster.</p>
+</dd></dl>
+
+<p>Once your job has been submitted the following commands can be usefull to monitor
+the job status and manage it.</p>
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-arg-qstat">
+<span class="sig-name descname"><span class="pre">qstat</span></span><span class="sig-prename descclassname"> <span class="pre">-u</span> <span class="pre">&lt;username&gt;</span></span><a class="headerlink" href="#cmdoption-arg-qstat" title="Permalink to this definition"></a></dt>
+<dd><p>Command returning all pending or running job assosciated with the specified
+username. <code class="code docutils literal notranslate"><span class="pre">qstat</span></code> can also be used without any option to return a list
+of all the job that <strong>qsub</strong> is treating at the moment.</p>
+</dd></dl>
+
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-arg-qdel">
+<span class="sig-name descname"><span class="pre">qdel</span></span><span class="sig-prename descclassname"> <span class="pre">&lt;job_id&gt;</span></span><a class="headerlink" href="#cmdoption-arg-qdel" title="Permalink to this definition"></a></dt>
+<dd><p>Command terminating the job with the specified ID.</p>
+</dd></dl>
+
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="job_op.html" class="btn btn-neutral float-left" title="Job submission" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="file_trans.html" class="btn btn-neutral float-right" title="File Transfert" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, Phillipe Gauvin-Bourdon and Betty Croft.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

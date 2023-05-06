@@ -1,0 +1,12 @@
+Stetson
+=======
+
+
+File structure
+--------------
+
+Job submission
+--------------
+
+File transfert
+--------------

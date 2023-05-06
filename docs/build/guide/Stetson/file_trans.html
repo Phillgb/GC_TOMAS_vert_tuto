@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>File Transfert &mdash; Installation and operation of GEOS-Chem TOMAS on Stetson 0.1 documentation</title>
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/fonts.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Getting started with GEOS-Chem TOMAS" href="../Gcc_TOMAS/geos-chem.html" />
+    <link rel="prev" title="How to use qsub:" href="scheduler.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../index.html" class="icon icon-home"> Installation and operation of GEOS-Chem TOMAS on Stetson
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Stetson User guide</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="Stetson.html">Getting Started on Stetson</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="dir_struc.html">Directory structure</a></li>
+<li class="toctree-l2"><a class="reference internal" href="job_op.html">Job submission</a></li>
+<li class="toctree-l2"><a class="reference internal" href="scheduler.html">How to use qsub:</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">File Transfert</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#sftp">SFTP</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#globus">GLOBUS</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#personal-globus-endpoint">Personal Globus Endpoint:</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">GEOS-Chem TOMAS user guide</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../Gcc_TOMAS/geos-chem.html">Getting started with GEOS-Chem TOMAS</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Installation and operation of GEOS-Chem TOMAS on Stetson</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home"></a></li>
+          <li class="breadcrumb-item"><a href="Stetson.html">Getting Started on Stetson</a></li>
+      <li class="breadcrumb-item active">File Transfert</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/guide/Stetson/file_trans.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="file-transfert">
+<h1>File Transfert<a class="headerlink" href="#file-transfert" title="Permalink to this headline"></a></h1>
+<p>When working on Stetson, you will most likely want to transfert data and files from
+your personnal computer to the cluster or the inverse. To do so, there are 2 main
+approachs, using the <a class="reference external" href="https://en.wikipedia.org/wiki/SSH_File_Transfer_Protocol">Secure File Transfert Protocol</a> (SFTP) or <a class="reference external" href="https://www.globus.org/">Globus</a> transfer service.</p>
+<section id="sftp">
+<h2>SFTP<a class="headerlink" href="#sftp" title="Permalink to this headline"></a></h2>
+<p>The SFTP protocol allow the user to transfer files between the Stetson cluster and
+a local machine while staying in the command line environment. It can be a good option
+for transfer if you want to quickly transfert a single file or a limited amount
+of small files to or from the Stetson cluster. With the command line interface,
+you can connect to Stetson using your <code class="code docutils literal notranslate"><span class="pre">username</span></code>, with the command that follows:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sftp username@stetson.phys.dal.ca
+</pre></div>
+</div>
+<p>This command will return the <code class="code docutils literal notranslate"><span class="pre">sftp</span></code> command prompt where transfers command
+can be issued. You can use the command <code class="code docutils literal notranslate"><span class="pre">help</span></code> to get a list of all available
+command in SFTP.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>There are also multiples graphical interface options to use SFTP, such as <a class="reference external" href="https://winscp.net/eng/index.php">WinSCP</a>
+(Windows), <a class="reference external" href="https://mobaxterm.mobatek.net/">MobaXterm</a> (Windows), <a class="reference external" href="https://filezilla-project.org/">filezilla</a> (Windows, Mac and Linux) or
+<a class="reference external" href="https://cyberduck.io/?l=en">cyberduck</a> (Mac and Windows).</p>
+</div>
+</section>
+<section id="globus">
+<h2>GLOBUS<a class="headerlink" href="#globus" title="Permalink to this headline"></a></h2>
+<p>For most use case, and particullarly when transfering large input files for the
+simulations or the output netcdf files resulting from the simulations, we recommend
+using the Globus transfer system to move files in and out of the Stetson cluster.</p>
+<p>Globus is a file transfer service both fast and reliable, which as an easy to use
+graphical interface. Before using this service, you will need to make sure that you
+have an active account at the <a class="reference external" href="https://alliancecan.ca/en">Digital Research Alliance of Canada</a> (formerly known as
+Compute Canada). Once you have your account, using globus is as simple as visiting
+the main <a class="reference external" href="https://app.globus.org/file-manager">Globus portal</a> and select “Compute Canada” when asked which organisation
+you are affiliated with. After supplying your username and password, you will be
+redirected to the transfer page.</p>
+<p>Transfers on Globus are made between collections. To access the Stetson cluster
+collection, simply click on the collection box and start typing “stetson”. After
+a couple seconds, a list of suggested collection corresponding to Stetson should
+appear, select the one named <code class="code docutils literal notranslate"><span class="pre">Globus</span> <span class="pre">Transfert</span></code>. You will then see a list
+of the directories present in the <a class="reference internal" href="dir_struc.html#globus-transfer-space"><span class="std std-ref">Transfert directory</span></a> described earlier.</p>
+<p>Navigate to your personnal folder, where the files to transfer are located and select
+all files to be tranfered as you would in the explorer of your local machine.
+You can then click on Transfer or sync in right hand side option bar of the interface
+to make your destination collection pane appear. In the search bar of this second
+pane, you can search for the collection name of the destination you want to put the
+selected files in. If you want to transfer files between the Stetson cluster and
+your personnal machine make sure that the Globus Connect personnal software is
+running or that you follow the steps in <a class="reference internal" href="#personal-globus-endpoint"><span class="std std-ref">Personal Globus Endpoint:</span></a> if it is
+your first time transfering data to a personnal endpoint.</p>
+<p>Once you have navigated to the folder where you want to store the file to transfer
+in the receiving collection pane, you can click on the <em>Start</em> blue button at the
+top of the origin collection pane to start the transfer of the files. Once the transfer
+as started, you can monitor its progress in the <em>Activity button</em> of the left hand side
+of the screen.</p>
+<p>For more information, on the usage of Globus, you can visit the Digital Research
+Alliance of Canada <a class="reference external" href="https://docs.alliancecan.ca/wiki/Globus">Globus wiki</a> page.</p>
+</section>
+<section id="personal-globus-endpoint">
+<span id="id1"></span><h2>Personal Globus Endpoint:<a class="headerlink" href="#personal-globus-endpoint" title="Permalink to this headline"></a></h2>
+<p>To tranfer file using Globus to and from your personnal machine, you will have first
+to create a personnal collection refering to your personnal machine. This process
+need only to be done the first time you use Globus with your personnal machine.
+Every subsequent time, you only need to make sure that the Globus Connect personnal
+software is running on your machine before attempting a transfer to or from your
+personnal machine.</p>
+<p>To install <strong>Globus Connect personnal</strong> follow these steps:</p>
+<ol class="arabic simple">
+<li><p>From the <a class="reference external" href="https://app.globus.org/file-manager">Globus Portal</a>, go to the <em>Collection</em> page by clicking the icon on the left side of the screen.</p></li>
+<li><p>Click on the “+ Get Globus Connect Personnal” button in the top of the screen</p></li>
+<li><p>Click on the download link corresponding to your operating system</p></li>
+<li><p>Follow the instruction on screen to install Globus Connect personnal</p></li>
+<li><p>You will now be able to use globus to and from your personnal computer.</p></li>
+</ol>
+<p>The Globus Connect personnal software need to be running and not paused every
+time you will want to access the collection point on your personnal machine. You
+can make sure that the software is not paused by “right clicking” on the Globus
+icon in the notification tray of your system.</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="scheduler.html" class="btn btn-neutral float-left" title="How to use qsub:" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../Gcc_TOMAS/geos-chem.html" class="btn btn-neutral float-right" title="Getting started with GEOS-Chem TOMAS" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, Phillipe Gauvin-Bourdon and Betty Croft.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
