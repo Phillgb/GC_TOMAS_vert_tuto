@@ -9,4 +9,5 @@ purpose of executing GEOS-Chem TOMAS simulations.
     
     dir_struc.rst
     job_op.rst
+    scheduler.rst
     file_trans.rst

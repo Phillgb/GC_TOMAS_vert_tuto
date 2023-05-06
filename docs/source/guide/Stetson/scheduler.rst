@@ -1,7 +1,7 @@
 .. _How to use qsub:
 
-How to use qsub:
-================
+Scheduler use 
+=============
 
 To execute tasks through a scheduler, the user need to provide that scheduler with
 some informations on the ressources needed to execute those tasks and a list of 
