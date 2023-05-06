@@ -24,6 +24,8 @@ author = 'Phillipe Gauvin-Bourdon and Betty Croft'
 # The full version, including alpha/beta/rc tags
 release = '0.1'
 
+# Specify master document for project
+master_doc = 'index'
 
 # -- General configuration ---------------------------------------------------
 
